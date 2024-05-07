@@ -1,7 +1,7 @@
 
-# O11yDay Meminator
+# Honeycomb Academy Meminator
 
-This contains a sample application for use in the Observability Day workshops.
+This contains a sample application for use in Honeycomb Academy.
 
 See it in action: [o11yday.jessitron.honeydemo.io]()
 
