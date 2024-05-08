@@ -11,40 +11,40 @@ services:
 
   meminator:
     build:
-      context: services/meminator-${PROGRAMMING_LANGUAGE}
+      context: services/meminator-nodejs
       dockerfile: Dockerfile
-    image: ${IMAGE_REPO_USER}/meminator-${PROGRAMMING_LANGUAGE}:${WORKSHOP_VERSION}
+    image: ${IMAGE_REPO_USER}/meminator-nodejs:latest
     ports:
       - "10116:10114" # they can't be the same
     environment:
       - OTEL_EXPORTER_OTLP_ENDPOINT
       - OTEL_EXPORTER_OTLP_HEADERS
-      - OTEL_SERVICE_NAME=meminator-${PROGRAMMING_LANGUAGE}
+      - OTEL_SERVICE_NAME=meminator-nodejs
 
   phrase-picker:
     build:
-      context: services/phrase-picker-${PROGRAMMING_LANGUAGE}
+      context: services/phrase-picker-nodejs
       dockerfile: Dockerfile
-    image: ${IMAGE_REPO_USER}/phrase-picker-${PROGRAMMING_LANGUAGE}:${WORKSHOP_VERSION}
+    image: ${IMAGE_REPO_USER}/phrase-picker-nodejs:latest
     ports:
       - "10117:10114" # the outer ports can't be the same
     environment:
       - OTEL_EXPORTER_OTLP_ENDPOINT
       - OTEL_EXPORTER_OTLP_HEADERS
-      - OTEL_SERVICE_NAME=phrase-picker-${PROGRAMMING_LANGUAGE}
+      - OTEL_SERVICE_NAME=phrase-picker-nodejs
 
   image-picker:
     build:
-      context: services/image-picker-${PROGRAMMING_LANGUAGE}
+      context: services/image-picker-nodejs
       dockerfile: Dockerfile
-    image: ${IMAGE_REPO_USER}/image-picker-${PROGRAMMING_LANGUAGE}:${WORKSHOP_VERSION}
+    image: ${IMAGE_REPO_USER}/image-picker-nodejs:latest
     ports:
       - "10118:10114" # the outer ports can't be the same
     environment:
       - BUCKET_NAME
       - OTEL_EXPORTER_OTLP_ENDPOINT
       - OTEL_EXPORTER_OTLP_HEADERS
-      - OTEL_SERVICE_NAME=image-picker-${PROGRAMMING_LANGUAGE}
+      - OTEL_SERVICE_NAME=image-picker-nodejs
 
   web:
     build:
@@ -52,7 +52,7 @@ services:
       dockerfile: Dockerfile
       args:
         HONEYCOMB_API_KEY: ${HONEYCOMB_API_KEY}
-    image: ${IMAGE_REPO_USER}/web:${WORKSHOP_VERSION}
+    image: ${IMAGE_REPO_USER}/web:latest
     # volumes: # uncomment this for faster development on the frontend
     #   - ./services/web/dist:/usr/share/nginx/html # Mount directory containing static files -- only do this for development
     ports:
