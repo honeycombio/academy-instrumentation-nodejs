@@ -18,7 +18,7 @@ Hello! Welcome to the **Instrumenting with Node.js** course lab.
 
 ## Running the application
 
-There are 2 ways you can run this app: 
+There are 3 ways you can run this app: 
 
 1. Locally in Docker Compose, which requires a one-time setup
 2. In Gitpod
