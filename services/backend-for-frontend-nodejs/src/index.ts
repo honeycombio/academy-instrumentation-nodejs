@@ -1,6 +1,5 @@
-import "./tracing"
 import express, { Request, Response } from 'express';
-import { fetchFromService } from "./o11yday-lib";
+import { fetchFromService } from "./internal-service-lib";
 
 const app = express();
 const PORT = 10114;
@@ -11,7 +10,6 @@ app.get("/health", (req: Request, res: Response) => {
 });
 
 app.post('/createPicture', async (req: Request, res: Response) => {
-  //  const span = trace.getActiveSpan();
     try {
         const [phraseResponse, imageResponse] = await Promise.all([
             fetchFromService('phrase-picker'),
@@ -19,7 +17,6 @@ app.post('/createPicture', async (req: Request, res: Response) => {
         ]);
         const phraseText = phraseResponse.ok ? await phraseResponse.text() : "{}";
         const imageText = imageResponse.ok ? await imageResponse.text() : "{}";
-    //    span?.setAttributes({ "app.phraseResponse": phraseText, "app.imageResponse": imageText }); // INSTRUMENTATION: add relevant info to span
         const phraseResult = JSON.parse(phraseText);
         const imageResult = JSON.parse(imageText);
 
@@ -51,7 +48,6 @@ app.post('/createPicture', async (req: Request, res: Response) => {
         res.end()
 
     } catch (error) {
-  //      span?.recordException(error as Error);
         console.error('Error creating picture:', error);
         res.status(500).send('Internal Server Error');
     }
