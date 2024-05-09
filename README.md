@@ -18,18 +18,30 @@ Hello! Welcome to the **Instrumenting with Node.js** course lab.
 
 ## Running the application
 
-There are 3 ways you can run this app: 
-
-1. Locally in Docker Compose, which requires a one-time setup
-2. In Gitpod
-3. Use Codespaces
+To run this app, you can use GitPod or Codespaces.
 
 Once you run the application, you can send traces to Honeycomb. Then you can practice improving the instrumentation for better observability. 
 
 
+### GitPod setup
+
+Go to [Gitpod](https://honeycombio-academyinst-i0cuptb35ss.ws-us110.gitpod.io/) to open the repository.
+
+Confirm the workspace creation. You can work in the browser with VS Code Browser or in your local code editor.
+
+
+### Codespaces setup
+
+Open the repository on GitHub. Open the `<> Code` dropdown down menu. 
+
+Select the `Codespaces` tab. Create a codespace on main. 
+
+
 ### One-time setup
 
-Clone this repository.
+You also have the option to run this application locally. 
+
+First, clone this repository.
 
 ```bash
 git clone https://github.com/honeycombio/academy-instrumentation-nodejs
@@ -46,18 +58,6 @@ HONEYCOMB_API_KEY="paste your api key here"
 If you don't have an API key handy, here is the [documentation](https://docs.honeycomb.io/get-started/configure/environments/manage-api-keys/#create-api-key).
 
 If you want more stepping-through of how to get an API key, there are instructions for this in [Observaquiz](https://quiz.honeydemo.io); type in a name to get to the second page.
-
-### GitPod setup
-
-Go to [Gitpod](https://honeycombio-academyinst-i0cuptb35ss.ws-us110.gitpod.io/) to open the repository.
-
-Confirm the workspace creation. You can work in the browser with VS Code Browser or in your local code editor.
-
-### Codespaces setup
-
-Open the repository on GitHub. Open the `<> Code` dropdown down menu. 
-
-Select the `Codespaces` tab. Create a codespace on main. 
 
 ### Run the app
 
