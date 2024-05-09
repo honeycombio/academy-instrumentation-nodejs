@@ -57,7 +57,6 @@ HONEYCOMB_API_KEY="paste your api key here"
 
 If you don't have an API key handy, here is the [documentation](https://docs.honeycomb.io/get-started/configure/environments/manage-api-keys/#create-api-key).
 
-If you want more stepping-through of how to get an API key, there are instructions for this in [Observaquiz](https://quiz.honeydemo.io); type in a name to get to the second page.
 
 ### Run the app
 
