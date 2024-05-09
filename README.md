@@ -49,7 +49,7 @@ git clone https://github.com/honeycombio/academy-instrumentation-nodejs
 
 Have Docker installed.
 
-Define your Honeycomb API key. Add this to the middle of `.env`:
+If you have not already defined your API key, do so by adding this to the middle of `.env`:
 
 ```bash
 HONEYCOMB_API_KEY="paste your api key here"
