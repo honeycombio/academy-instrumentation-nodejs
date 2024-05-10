@@ -9,7 +9,7 @@ It generates images by combining a randomly chosen picture with a randomly chose
 
 Hello! Welcome to the **Instrumenting with Node.js** course lab.
 
-1. Take a look at this app. The `backend-to-frontend` service needs to be instrumented.
+1. Take a look at this app. The `backend-for-frontend` service needs to be instrumented.
 2. Before you can do that, you need to run this app. 
 3. Then, connect this app to Honeycomb.
 4. See what the traces look like.
