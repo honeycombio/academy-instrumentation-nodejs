@@ -1,9 +1,9 @@
 services:
   backend-for-frontend:
     build:
-      context: services/backend-for-frontend-nodejs
+      context: services/backend-for-frontend-python
       dockerfile: Dockerfile
-    image: backend-for-frontend-nodejs:latest
+    image: backend-for-frontend-python:latest
     ports:
       - "10115:10114"
     environment:
@@ -11,40 +11,40 @@ services:
 
   meminator:
     build:
-      context: services/meminator-nodejs
+      context: services/meminator-python
       dockerfile: Dockerfile
-    image: ${IMAGE_REPO_USER}/meminator-nodejs:latest
+    image: ${IMAGE_REPO_USER}/meminator-python:latest
     ports:
       - "10116:10114" # they can't be the same
     environment:
       - OTEL_EXPORTER_OTLP_ENDPOINT
       - OTEL_EXPORTER_OTLP_HEADERS
-      - OTEL_SERVICE_NAME=meminator-nodejs
+      - OTEL_SERVICE_NAME=meminator-python
 
   phrase-picker:
     build:
-      context: services/phrase-picker-nodejs
+      context: services/phrase-picker-python
       dockerfile: Dockerfile
-    image: ${IMAGE_REPO_USER}/phrase-picker-nodejs:latest
+    image: ${IMAGE_REPO_USER}/phrase-picker-python:latest
     ports:
       - "10117:10114" # the outer ports can't be the same
     environment:
       - OTEL_EXPORTER_OTLP_ENDPOINT
       - OTEL_EXPORTER_OTLP_HEADERS
-      - OTEL_SERVICE_NAME=phrase-picker-nodejs
+      - OTEL_SERVICE_NAME=phrase-picker-python
 
   image-picker:
     build:
-      context: services/image-picker-nodejs
+      context: services/image-picker-python
       dockerfile: Dockerfile
-    image: ${IMAGE_REPO_USER}/image-picker-nodejs:latest
+    image: ${IMAGE_REPO_USER}/image-picker-python:latest
     ports:
       - "10118:10114" # the outer ports can't be the same
     environment:
       - BUCKET_NAME
       - OTEL_EXPORTER_OTLP_ENDPOINT
       - OTEL_EXPORTER_OTLP_HEADERS
-      - OTEL_SERVICE_NAME=image-picker-nodejs
+      - OTEL_SERVICE_NAME=image-picker-python
 
   web:
     build:
