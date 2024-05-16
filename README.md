@@ -18,7 +18,7 @@ Hello! Welcome to the **Instrumenting with Node.js** course lab.
 
 ## Running the application
 
-To run this app, you can use GitPod or Codespaces.
+To run this app, you can use GitPod or Codespaces. Note that Gitpod and Codespaces are free up to a certain number of hours per month. 
 
 Once you run the application, you can send traces to Honeycomb. Then you can practice improving the instrumentation for better observability. 
 
