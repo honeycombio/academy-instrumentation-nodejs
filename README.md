@@ -47,12 +47,23 @@ First, clone this repository.
 git clone https://github.com/honeycombio/academy-instrumentation-nodejs
 ```
 
-Have Docker installed.
+Install Docker: https://docs.docker.com/get-docker/
 
-If you have not already defined your API key, do so by adding this to the middle of `.env`:
-
+Create a `.env` file from the example:
 ```bash
-HONEYCOMB_API_KEY="paste your api key here"
+cp example.env .env
+```
+
+And update the `.env` file with your Honeycomb API key:
+```bash
+HONEYCOMB_API_KEY="your-api-key"
+```
+# you could change this to your own S3 bucket of images. We accept no responsibility for the outcome.
+# Note: "random-pictures" is an actual S3 bucket name supplied for this course, filled with SFW meme images
+BUCKET_NAME="random-pictures"
+
+OTEL_EXPORTER_OTLP_ENDPOINT="https://api.honeycomb.io:443/"
+OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=${HONEYCOMB_API_KEY}"
 ```
 
 If you don't have an API key handy, here is the [documentation](https://docs.honeycomb.io/get-started/configure/environments/manage-api-keys/#create-api-key).
