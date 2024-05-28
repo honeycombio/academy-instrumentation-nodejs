@@ -27,8 +27,9 @@ Once you run the application, you can send traces to Honeycomb. Then you can pra
 
 Go to [Gitpod](https://gitpod.io/#https://github.com/honeycombio/academy-instrumentation-nodejs) to open the repository.
 
-Confirm the workspace creation. You can work in the browser with VS Code Browser or in your local code editor.
+Confirm the workspace creation. You can work in the browser with VS Code Browser or in your local code editor. The default settings are acceptable. 
 
+Once you are in the code editor, run `docker compose up` in the code editor's terminal. To stop running the application, run `ctrl+c`. Then run `docker compose down` to remove the container.
 
 ### Codespaces setup
 
