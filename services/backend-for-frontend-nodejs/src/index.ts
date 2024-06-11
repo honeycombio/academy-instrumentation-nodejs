@@ -1,13 +1,19 @@
 import express, { Request, Response } from 'express';
 import healthcheck from 'express-healthcheck';
 import { fetchFromService } from "./internal-service-lib";
+// import { trace } from '@opentelemetry/api';
 
 const app = express();
 const PORT = 10115;
+
+// const tracer = trace.getTracer('default')
+
 app.use(express.json());
 app.use('/health', healthcheck());
 
 app.post('/createPicture', async (req: Request, res: Response) => {
+    // const span = trace.getActiveSpan();
+    // const createPictureSpan = tracer.startSpan('create picture');
     try {
         const [phraseResponse, imageResponse] = await Promise.all([
             fetchFromService('phrase-picker'),
@@ -15,8 +21,10 @@ app.post('/createPicture', async (req: Request, res: Response) => {
         ]);
         const phraseText = phraseResponse.ok ? await phraseResponse.text() : "{}";
         const imageText = imageResponse.ok ? await imageResponse.text() : "{}";
+        // span?.setAttributes({ "app.phraseResponse": phraseText, "app.imageResponse": imageText }); // INSTRUMENTATION: add relevant info to span
         const phraseResult = JSON.parse(phraseText);
         const imageResult = JSON.parse(imageText);
+        // createPictureSpan?.setAttributes({ "app.phraseResult": phraseResult, "app.imageResult": imageResult})
 
         const response = await fetchFromService('meminator', {
             method: "POST",
@@ -28,6 +36,7 @@ app.post('/createPicture', async (req: Request, res: Response) => {
         if (!response.ok) {
             throw new Error(`Failed to fetch picture from meminator: ${response.status} ${response.statusText}`);
         }
+
         if (response.body === null) {
             throw new Error(`Failed to fetch picture from meminator: ${response.status} ${response.statusText}`);
         }
@@ -46,11 +55,13 @@ app.post('/createPicture', async (req: Request, res: Response) => {
         res.end()
 
     } catch (error) {
+        // span?.recordException(error as Error);
+        // createPictureSpan?.recordException(error as Error);
         console.error('Error creating picture:', error);
         res.status(500).send('Internal Server Error');
     }
+    // createPictureSpan.end()
 });
-
 
 // Start the server
 app.listen(PORT, () => {
