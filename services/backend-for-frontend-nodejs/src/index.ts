@@ -63,7 +63,6 @@ app.post('/createPicture', async (req: Request, res: Response) => {
     // createPictureSpan.end()
 });
 
-
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
