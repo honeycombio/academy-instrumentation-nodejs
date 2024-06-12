@@ -1,0 +1,5 @@
+#!/bin/sh
+
+set -x # print what you run
+
+docker compose down
