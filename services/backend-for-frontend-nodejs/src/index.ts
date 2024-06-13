@@ -85,19 +85,29 @@ app.get("/sleep", async (req: Request, res: Response) => {
     // this propagated context will include all the Express startup and middlware stuff as well as the prior web calls.
 
     // make a link
+    let options = {}
+    if(propagatedSpan !== undefined){
+      options = {
+        links: [
+            {
+              context: propagatedSpan.spanContext(),
+            },
+          ],
+      };   
+    } 
 
     // now make a new span with a different context
     let ctx = ROOT_CONTEXT
-    const newTraceRootSpan = tracer.startSpan("sleepy endpoint root span", {}, ctx); // override the context  
+    const newTraceRootSpan = tracer.startSpan("sleepy activity root span", options, ctx); // override the context  
 
     ctx = trace.setSpan(ctx, newTraceRootSpan)
 
     for(let i = 0; i < 5; i++){
-        const childSpan = tracer.startSpan('sleepy child span', {}, ctx) 
-        childSpan?.setAttributes({ "app.timePassed": i})
-        console.log("time passes %d", i)
-        await new Promise(resolve => setTimeout(resolve, 400)); // let some time pass.
-        childSpan.end()
+      const childSpan = tracer.startSpan('sleepy child span', {}, ctx) 
+      childSpan?.setAttributes({ "app.timePassed": i})
+      console.log("time passes %d", i)
+      await new Promise(resolve => setTimeout(resolve, 400)); // let some time pass.
+      childSpan.end()
     }
     res.status(200).send("Awake time!\r\n")
     newTraceRootSpan?.end()
