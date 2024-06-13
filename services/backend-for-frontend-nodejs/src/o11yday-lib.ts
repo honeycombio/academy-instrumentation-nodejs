@@ -11,6 +11,7 @@ const SERVICES = {
     meminator: 'http://meminator:10114/applyPhraseToPicture', // this one is a POST
     'phrase-picker': 'http://phrase-picker:10114/phrase',
     'image-picker': 'http://image-picker:10114/imageUrl',
+    'sleep': 'http://backend-for-frontend:10114/sleep'
 }
 
 type FetchOptions = {
