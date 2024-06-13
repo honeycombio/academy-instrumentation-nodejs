@@ -14,9 +14,25 @@ app.post('/createPicture', async (req: Request, res: Response) => {
     const span = trace.getActiveSpan();
     const createPictureSpan = tracer.startSpan('create picture');
     try {
-        // start an async task that takes a while but we don't want to wait for
-        fetchFromService('sleep', {
-            method: "GET"
+        
+        // make a link for an async task that we don't want to wait for
+        let options = {}
+        if(span !== undefined){
+            options = {
+                links: [
+                    {
+                    context: span.spanContext(),
+                    },
+                ],
+            };   
+        }
+        
+        // call the async task with a separate span from ROOT_CONTEXT
+        tracer.startActiveSpan("sleepy activity root span", options, ROOT_CONTEXT, (span) => {
+            fetchFromService('sleep', {
+                method: "GET"
+            });
+            span.end()
         });
 
         // start the async tasks that we do want to wait for
@@ -76,37 +92,12 @@ app.listen(PORT, () => {
 
 // Asyncronous function
 app.get("/sleep", async (req: Request, res: Response) => {
-    // get the context that was passed in but don't start anything
-    const propagatedSpan = trace.getActiveSpan();
-    console.log("propagated trace and span IDs: %s, %s", propagatedSpan?.spanContext().traceId, propagatedSpan?.spanContext().spanId)
-    const propagatedCtx = context.active();
-    // this propagated context will include all the Express startup and middlware stuff as well as the prior web calls.
-
-    // make a link
-    let options = {}
-    if(propagatedSpan !== undefined){
-      options = {
-        links: [
-            {
-              context: propagatedSpan.spanContext(),
-            },
-          ],
-      };   
-    } 
-
-    // now make a new span with a different context
-    let ctx = ROOT_CONTEXT
-    const newTraceRootSpan = tracer.startSpan("sleepy activity root span", options, ctx); // override the context  
-
-    ctx = trace.setSpan(ctx, newTraceRootSpan)
-
     for(let i = 0; i < 5; i++){
-      const childSpan = tracer.startSpan('sleepy child span', {}, ctx) 
+      const childSpan = tracer.startSpan('sleepy child span') 
       childSpan?.setAttributes({ "app.timePassed": i})
       console.log("time passes %d", i)
       await new Promise(resolve => setTimeout(resolve, 400)); // let some time pass.
       childSpan.end()
     }
     res.status(200).send("Awake time!\r\n")
-    newTraceRootSpan?.end()
 });
