@@ -19,11 +19,11 @@ app.post('/createPicture', async (req: Request, res: Response) => {
         
         // make a link for an async task that we don't want to wait for
         let options = {}
-        if(span !== undefined){
+        if(createPictureSpan !== undefined){
             options = {
                 links: [
                     {
-                    context: span.spanContext(),
+                    context: createPictureSpan.spanContext(),
                     },
                 ],
             };   
@@ -90,7 +90,6 @@ app.post('/createPicture', async (req: Request, res: Response) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
-
 
 // Asyncronous function
 app.get("/sleep", async (req: Request, res: Response) => {
