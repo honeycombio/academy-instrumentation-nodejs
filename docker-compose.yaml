@@ -7,13 +7,15 @@ services:
     ports:
       - "10115:10114"
     environment:
-      - MY_SERVICE=backend-for-frontend
+      - OTEL_EXPORTER_OTLP_ENDPOINT
+      - OTEL_EXPORTER_OTLP_HEADERS
+      - OTEL_SERVICE_NAME=backend-for-frontend
 
   meminator:
     build:
       context: services/meminator-nodejs
       dockerfile: Dockerfile
-    image: ${IMAGE_REPO_USER}/meminator-nodejs:latest
+    image: meminator-nodejs:latest
     ports:
       - "10116:10114" # they can't be the same
     environment:
@@ -25,7 +27,7 @@ services:
     build:
       context: services/phrase-picker-nodejs
       dockerfile: Dockerfile
-    image: ${IMAGE_REPO_USER}/phrase-picker-nodejs:latest
+    image: phrase-picker-nodejs:latest
     ports:
       - "10117:10114" # the outer ports can't be the same
     environment:
@@ -37,7 +39,7 @@ services:
     build:
       context: services/image-picker-nodejs
       dockerfile: Dockerfile
-    image: ${IMAGE_REPO_USER}/image-picker-nodejs:latest
+    image: image-picker-nodejs:latest
     ports:
       - "10118:10114" # the outer ports can't be the same
     environment:
@@ -52,7 +54,7 @@ services:
       dockerfile: Dockerfile
       args:
         HONEYCOMB_API_KEY: ${HONEYCOMB_API_KEY}
-    image: ${IMAGE_REPO_USER}/web:latest
+    image: web:latest
     # volumes: # uncomment this for faster development on the frontend
     #   - ./services/web/dist:/usr/share/nginx/html # Mount directory containing static files -- only do this for development
     ports:
