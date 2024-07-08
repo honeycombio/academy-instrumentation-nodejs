@@ -1,8 +1,7 @@
 import "./tracing"
 import express, { Request, Response } from 'express';
 import { fetchFromService } from "./o11yday-lib";
-import { trace, SpanStatusCode } from '@opentelemetry/api';
-import e from "express";
+import { trace } from '@opentelemetry/api';
 
 const app = express();
 const PORT = 10114;
@@ -16,13 +15,6 @@ app.get("/health", (req: Request, res: Response) => {
 app.post('/createPicture', async (req: Request, res: Response) => {
     // const span = trace.getActiveSpan();
     // const createPictureSpan = tracer.startSpan('create picture');
-
-    // TS error type helper function
-    // const getErrorMessage = (error: unknown) => {
-    //     if(error instanceof Error) error.message
-    //     return "some error that is not an Error" + String(error)
-    // }
-
     try {
         const [phraseResponse, imageResponse] = await Promise.all([
             fetchFromService('phrase-picker'),
@@ -64,18 +56,7 @@ app.post('/createPicture', async (req: Request, res: Response) => {
 
     } catch (error) {
         // span?.recordException(error as Error);
-        // createPictureSpan.setStatus({ code: SpanStatusCode.ERROR }) // Step 1 of set status 
-        // createPictureSpan.setStatus({ code: SpanStatusCode.ERROR, message: (error as Error).message }) // Step 2 of set status
-        // createPictureSpan.recordException(error as Error) // Step 3 of set status
-
-        // Best practice to handle TS type safety
-        // if (error instanceof Error) {
-        //     createPictureSpan.setStatus({ code: SpanStatusCode.ERROR, message: error.message }) // Step 2 of set status
-        //     createPictureSpan.recordException(error) // Step 3 of set status
-        // } else {
-        //     createPictureSpan.setStatus({ code: SpanStatusCode.ERROR, message: "some non-error message" + error })
-        // }
-
+        // createPictureSpan?.recordException(error as Error);
         console.error('Error creating picture:', error);
         res.status(500).send('Internal Server Error');
     }
