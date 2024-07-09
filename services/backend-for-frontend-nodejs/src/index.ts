@@ -58,3 +58,15 @@ app.post('/createPicture', async (req: Request, res: Response) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+
+// Asynchronous fuction for creating a custom span with a new trace.
+// app.get("/sleep", async (req: Request, res: Response) => {
+//     for(let i = 0; i < 5; i++){
+//         const childSpan = tracer.startSpan('sleepy child span') 
+//         childSpan?.setAttributes({ "app.timePassed": i})
+//         console.log("time passes %d", i)
+//         await new Promise(resolve => setTimeout(resolve, 400)); // let some time pass.
+//         childSpan.end()
+//     }
+//     res.status(200).send("Awake time!\r\n")
+// });
