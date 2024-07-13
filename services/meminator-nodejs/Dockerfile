@@ -29,7 +29,7 @@ RUN npx tsc
 
 
 # Expose the port that your app runs on
-EXPOSE 10114
+EXPOSE 10117
 
 # Command to run your application
 CMD ["npm", "start"]

@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import { fetchFromService } from "./internal-service-lib";
 
 const app = express();
-const PORT = 10114;
+const PORT = 10115;
 app.use(express.json());
 
 app.get("/health", (req: Request, res: Response) => {
