@@ -1,13 +1,12 @@
 import express, { Request, Response } from 'express';
+import healthcheck from 'express-healthcheck';
 import { fetchFromService } from "./internal-service-lib";
 
 const app = express();
-const PORT = 10114;
-app.use(express.json());
 
-app.get("/health", (req: Request, res: Response) => {
-    res.send({ message: "I am here", status_code: 0 });
-});
+const PORT = 10115;
+app.use(express.json());
+app.use('/health', healthcheck());
 
 app.post('/createPicture', async (req: Request, res: Response) => {
     try {

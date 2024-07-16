@@ -5,8 +5,6 @@
 # Or, run with a parameter service name (from docker-compose) to restart just that service
 # `./run meminator`
 
-set -x # print what you run
-
 docker compose up --build -d $*
 
-echo "http://localhost:8080"
+echo "Meminator running on port 10114"
