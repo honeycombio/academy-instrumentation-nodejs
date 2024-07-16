@@ -22,6 +22,11 @@ To run this app, you can use GitPod or Codespaces. Note that Gitpod and Codespac
 
 Once you run the application, you can send traces to Honeycomb. Then you can practice improving the instrumentation for better observability. 
 
+### Codespaces setup
+
+Open the repository on GitHub. Open the `<> Code` dropdown down menu. 
+
+Select the `Codespaces` tab. Create a codespace on main. 
 
 ### GitPod setup
 
@@ -30,13 +35,6 @@ Go to [Gitpod](https://gitpod.io/#https://github.com/honeycombio/academy-instrum
 Confirm the workspace creation. You can work in the browser with VS Code Browser or in your local code editor. The default settings are acceptable. 
 
 Once you are in the code editor, run `docker compose up` in the code editor's terminal. To stop running the application, run `ctrl+c`. Then run `docker compose down` to remove the container.
-
-### Codespaces setup
-
-Open the repository on GitHub. Open the `<> Code` dropdown down menu. 
-
-Select the `Codespaces` tab. Create a codespace on main. 
-
 
 ### One-time setup
 
@@ -49,11 +47,6 @@ git clone https://github.com/honeycombio/academy-instrumentation-nodejs
 ```
 
 Install Docker: https://docs.docker.com/get-docker/
-
-Create a `.env` file from the example:
-```bash
-cp example.env .env
-```
 
 And update the `.env` file with your Honeycomb API key:
 ```bash
@@ -78,7 +71,7 @@ If you don't have an API key handy, here is the [documentation](https://docs.hon
 
 Access the app:
 
-[http://localhost:8080]()
+[http://localhost:10114]()
 
 After making changes to a service, you can tell it to rebuild just that one:
 
@@ -86,6 +79,10 @@ After making changes to a service, you can tell it to rebuild just that one:
 
 ### Try it out
 
-Visit [http://localhost:8080]()
+Visit [http://localhost:10114]()
 
 Click the "GO" button. Then wait.
+
+### Stop the app
+
+`./stop`
