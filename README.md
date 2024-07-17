@@ -22,7 +22,7 @@ To run this app, you can use GitPod or Codespaces. Note that Gitpod and Codespac
 
 Once you run the application, you can send traces to Honeycomb. Then you can practice improving the instrumentation for better observability. 
 
-### Codespaces setup
+### GitHub Codespaces setup
 
 Open the repository on GitHub. Open the `<> Code` dropdown down menu. 
 
