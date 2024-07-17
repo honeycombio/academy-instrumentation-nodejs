@@ -8,7 +8,6 @@ const IMAGES = [
     "Angrybird.JPG",
     "Arco&Tub.png",
     "IMG_9343.jpg",
-    "heatmap.png",
     "angry-lemon-ufo.JPG",
     "austintiara4.png",
     "baby-geese.jpg",
@@ -18,7 +17,6 @@ const IMAGES = [
     "busted-light.jpg",
     "cat-glowing-eyes.JPG",
     "cat-on-leash.JPG",
-    "cat-with-bowtie.heic",
     "cat.jpg",
     "clementine.png",
     "cow-peeking.jpg",
@@ -37,11 +35,13 @@ const IMAGES = [
     "jean-and-statue.png",
     "jessitron.png",
     "keys-drying.jpg",
+    "leftridge.png",
     "lime-on-soap-dispenser.jpg",
     "loki-closeup.jpg",
     "lynia.png",
     "ninguang-at-work.png",
     "paul-r-allen.png",
+    "pile-of-cars.png",
     "please.png",
     "roswell-nose.jpg",
     "roswell.JPG",
@@ -61,7 +61,7 @@ const IMAGES = [
 ].map((filename) => `https://${BUCKET_NAME}.s3.amazonaws.com/${filename}`);
 
 const app = express();
-const PORT = process.env.PORT || 10114;
+const PORT = process.env.PORT || 10116;
 
 // Middleware to parse JSON bodies
 app.use(express.json());

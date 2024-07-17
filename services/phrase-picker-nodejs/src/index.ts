@@ -25,7 +25,7 @@ const PHRASES = [
 ]
 
 const app = express();
-const PORT = 10114; // You can change the port number as needed
+const PORT = 10118; // You can change the port number as needed
 
 // Middleware to parse JSON bodies
 app.use(express.json());
