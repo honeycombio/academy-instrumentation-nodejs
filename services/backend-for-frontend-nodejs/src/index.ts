@@ -23,6 +23,27 @@ app.post('/createPicture', async (req: Request, res: Response) => {
     // }
 
     try {
+        // For async new traces: make a link for an async task that we don't want to wait for
+        // let options = {}
+        // if(createPictureSpan !== undefined){
+        //     options = {
+        //         links: [
+        //             {
+        //             context: createPictureSpan.spanContext(),
+        //             },
+        //         ],
+        //     };   
+        // }
+        
+        // // call the async task with a separate span from ROOT_CONTEXT
+        // tracer.startActiveSpan("sleepy activity root span", options, ROOT_CONTEXT, (span) => {
+        //     fetchFromService('sleep', {
+        //         method: "GET"
+        //     });
+        //     span.end()
+        // });
+
+        // For async new traces: start the async tasks that we do want to wait for
         const [phraseResponse, imageResponse] = await Promise.all([
             fetchFromService('phrase-picker'),
             fetchFromService('image-picker')
@@ -87,7 +108,7 @@ app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
 
-// Asynchronous fuction for creating a custom span with a new trace.
+// Asynchronous function for creating a custom span with a new trace.
 // app.get("/sleep", async (req: Request, res: Response) => {
 //     for(let i = 0; i < 5; i++){
 //         const childSpan = tracer.startSpan('sleepy child span') 
