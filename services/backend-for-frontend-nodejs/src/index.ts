@@ -23,6 +23,7 @@ app.post('/createPicture', async (req: Request, res: Response) => {
     // }
 
     try {
+        // createPictureSpan.addEvent('log-event', {message: 'Picture was successfully create'})
         // For async new traces: make a link for an async task that we don't want to wait for
         // let options = {}
         // if(createPictureSpan !== undefined){
@@ -88,6 +89,7 @@ app.post('/createPicture', async (req: Request, res: Response) => {
         // createPictureSpan.setStatus({ code: SpanStatusCode.ERROR }) // Step 1 of set status 
         // createPictureSpan.setStatus({ code: SpanStatusCode.ERROR, message: (error as Error).message }) // Step 2 of set status
         // createPictureSpan.recordException(error as Error) // Step 3 of set status
+        // createPictureSpan.addEvent('error-event', { error: (error as Error).message }); // create span event for error
 
         // Best practice to handle TS type safety
         // if (error instanceof Error) {
