@@ -1,14 +1,25 @@
+import "./tracing"
 import express, { Request, Response } from 'express';
 import healthcheck from 'express-healthcheck';
 import { fetchFromService } from "./internal-service-lib";
+import { trace } from '@opentelemetry/api';
 
 const app = express();
 const PORT = 10115;
+
+const tracer = trace.getTracer('default')
+
 app.use(express.json());
 app.use('/health', healthcheck());
 
 app.post('/createPicture', async (req: Request, res: Response) => {
+    const span = trace.getActiveSpan();
+    const createPictureSpan = tracer.startSpan('create picture');
     try {
+        fetchFromService('sleep', {
+           method: "GET"
+        });
+ 
         const [phraseResponse, imageResponse] = await Promise.all([
             fetchFromService('phrase-picker'),
             fetchFromService('image-picker')
@@ -17,6 +28,7 @@ app.post('/createPicture', async (req: Request, res: Response) => {
         const imageText = imageResponse.ok ? await imageResponse.text() : "{}";
         const phraseResult = JSON.parse(phraseText);
         const imageResult = JSON.parse(imageText);
+        span?.setAttributes({ "app.phraseResponse": phraseText, "app.imageResponse": imageText });
 
         const response = await fetchFromService('meminator', {
             method: "POST",
@@ -43,12 +55,14 @@ app.post('/createPicture', async (req: Request, res: Response) => {
             }
             res.write(value);
         }
+        span?.end()
         res.end()
 
     } catch (error) {
         console.error('Error creating picture:', error);
         res.status(500).send('Internal Server Error');
     }
+    createPictureSpan.end()
 });
 
 
@@ -58,13 +72,13 @@ app.listen(PORT, () => {
 });
 
 // Asynchronous fuction for creating a custom span with a new trace.
-// app.get("/sleep", async (req: Request, res: Response) => {
-//     for(let i = 0; i < 5; i++){
-//         const childSpan = tracer.startSpan('sleepy child span') 
-//         childSpan?.setAttributes({ "app.timePassed": i})
-//         console.log("time passes %d", i)
-//         await new Promise(resolve => setTimeout(resolve, 400)); // let some time pass.
-//         childSpan.end()
-//     }
-//     res.status(200).send("Awake time!\r\n")
-// });
+app.get("/sleep", async (req: Request, res: Response) => {
+     for(let i = 0; i < 5; i++){
+         const childSpan = tracer.startSpan('sleepy child span') 
+         childSpan?.setAttributes({ "app.timePassed": i})
+         console.log("time passes %d", i)
+         await new Promise(resolve => setTimeout(resolve, 400)); // let some time pass.
+         childSpan.end()
+     }
+     res.status(200).send("Awake time!\r\n")
+ });
