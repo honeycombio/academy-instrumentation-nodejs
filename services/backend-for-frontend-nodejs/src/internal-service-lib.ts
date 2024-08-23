@@ -7,6 +7,7 @@ const SERVICES = {
     'image-picker': 'http://image-picker:10116/imageUrl',
     'meminator': 'http://meminator:10117/applyPhraseToPicture', // this one is a POST
     'phrase-picker': 'http://phrase-picker:10118/phrase',
+    'sleep': 'http://backend-for-frontend:10114/sleep',
 }
 
 type FetchOptions = {
