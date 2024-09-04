@@ -7,6 +7,9 @@ WORKDIR /usr/src/app
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
+# install curl
+RUN apk add curl
+
 # Install dependencies
 RUN npm install
 
@@ -17,7 +20,7 @@ COPY ./src ./src
 RUN npx tsc 
 
 # Expose the port that your app runs on
-EXPOSE 10114
+EXPOSE 10115
 
 # Command to run your application
 CMD ["npm", "start"]
