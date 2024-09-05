@@ -6,9 +6,9 @@ import * as opentelemetry from '@opentelemetry/api';
 // For adding resource attributes
 // import { Resource } from '@opentelemetry/resources'
 // import {
-//   SEMRESATTRS_SERVICE_NAMESPACE,
-//   SEMRESATTRS_SERVICE_VERSION,
-//   SEMRESATTRS_SERVICE_INSTANCE_ID } from '@opentelemetry/semantic-conventions';
+//   ATTR_SERVICE_NAMESPACE,
+//   ATTR_SERVICE_VERSION,
+//   ATTR_SERVICE_INSTANCE_ID } from '@opentelemetry/semantic-conventions/incubating';
 
 opentelemetry.diag.setLogger(
     new opentelemetry.DiagConsoleLogger(),
@@ -22,9 +22,9 @@ const traceExporter = new OTLPTraceExporter();
 const sdk = new NodeSDK({
 // Inject resource attributes
     // resource: new Resource ({
-    //   [ SEMRESATTRS_SERVICE_NAMESPACE ]: "yourNameSpace",
-    //   [ SEMRESATTRS_SERVICE_VERSION ]: "1.0",
-    //   [ SEMRESATTRS_SERVICE_INSTANCE_ID ]: "my-instance-id-1",
+    //   [ ATTR_SERVICE_NAMESPACE ]: "yourNameSpace",
+    //   [ ATTR_SERVICE_VERSION ]: "1.0",
+    //   [ ATTR_SERVICE_INSTANCE_ID ]: "my-instance-id-1",
     // }),
     traceExporter,
     // spanProcessors: [new ConfigurationSpanProcessor(), new BatchSpanProcessor(traceExporter)], // INSTRUMENTATION: report global configuration on every span
