@@ -1,6 +1,6 @@
 import "./tracing"
 import express, { Request, Response } from 'express';
-import { fetchFromService } from "./o11yday-lib";
+import { fetchFromService } from "./internal-service-lib";
 import { trace } from '@opentelemetry/api';
 
 const app = express();
