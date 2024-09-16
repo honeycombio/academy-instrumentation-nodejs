@@ -2,7 +2,7 @@
 
 # Honeycomb Academy: Sample Meminator App
 
-***This is a demo app, don't run it in production***
+***This is a demo app, don't run it in production.***
 
 This contains a sample application for use in Honeycomb Academy lab activities. This app has 4 services.  
 
