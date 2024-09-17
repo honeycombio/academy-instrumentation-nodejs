@@ -1,5 +1,5 @@
 // import { trace, context, ROOT_CONTEXT, SpanStatusCode } from '@opentelemetry/api'; // Import modules from OTel
-// Step 1 Add Span Attributes and Create Custom Spans. Import trace module
+// Step 1 Add Span Attributes and Step 1 Create Custom Spans. Import trace module
 // Step 3 Create New Traces. Add ROOT_CONTEXT
 // Step 1 Add Span Status. Add SpanStatusCode
 // import "./tracing" // Step 4 Auto Instrumentation. Import tracing file 
@@ -25,9 +25,6 @@ app.post('/createPicture', async (req: Request, res: Response) => {
     // }
 
     try {
-        // const span = trace.getActiveSpan(); // Step 2 Add Span Attributes. Create a span
-        // const createPictureSpan = tracer.startSpan('create picture');
-        try {
         //    createPictureSpan.addEvent('log-event', {'log.message': 'Picture successfully created'}); // Step 2 Create Span Events. Add span event to capture log event with custom message
         // Step 5 Create New Trace. To create span link, create options cariable that contains link to other spans
         //     let options = {}
@@ -111,7 +108,7 @@ app.post('/createPicture', async (req: Request, res: Response) => {
         res.status(500).send('Internal Server Error');
     }
     // createPictureSpan.end() // Step 4 Create Custom Spans. End the span
-// });
+ });
 
 // Start the server
 app.listen(PORT, () => {
