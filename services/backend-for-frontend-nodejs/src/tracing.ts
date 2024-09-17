@@ -1,10 +1,15 @@
+// Answer Key Directions
+// The Instrumenting with Node.js Using OpenTelemetry course on Honeycomb Academy gives you instructions on making code changes to this respository to implement instrumentation to the backend-for-frontend service. 
+// The code changes are commented out. 
+// Each code change includes a reference back to the activity in the course that contains instructions for the code change.
+
 // tracing.ts
-// Step 3 Auto Instrumentation. Create tracing file
+// Step 3 of Automatic Instrumentation with OpenTelemetry for a Node.js Service. Create the tracing.ts file.
 import { NodeSDK } from '@opentelemetry/sdk-node';
 import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-proto";
 import * as opentelemetry from '@opentelemetry/api';
-// Step 2 Add Resource Attributes. Import the resource library and semantic conventions
+// Step 2 of Add Resource Attributes. Import the resource library and semantic conventions libaries from OpenTelemetry
 // import { Resource } from '@opentelemetry/resources'
 // import {
 //   ATTR_SERVICE_NAMESPACE,
@@ -21,7 +26,7 @@ opentelemetry.diag.setLogger(
 const traceExporter = new OTLPTraceExporter();
 
 const sdk = new NodeSDK({
-    // Step 3 Add Resource Attributes. Add resource attribtue in SDK
+    // Step 3 of Add Resource Attributes. Add the resource attribute in the SDK
         // resource: new Resource({
         //     [ ATTR_SERVICE_NAMESPACE ]: "yourNameSpace",
         //     [ ATTR_SERVICE_VERSION ]: "1.0",
