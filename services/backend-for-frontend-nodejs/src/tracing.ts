@@ -4,7 +4,7 @@ import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentation
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-proto";
 import * as opentelemetry from '@opentelemetry/api';
 // For adding resource attributes
-// import { Resource } from '@opentelemetry/resources'
+// import { resourceFromAttributes, defaultResource, emptyResource } from '@opentelemetry/resources'
 // import {
 //   ATTR_SERVICE_NAMESPACE,
 //   ATTR_SERVICE_VERSION,
@@ -21,7 +21,7 @@ const traceExporter = new OTLPTraceExporter();
 
 const sdk = new NodeSDK({
 // Inject resource attributes
-    // resource: new Resource ({
+    // resource: resourceFromAttributes({
     //   [ ATTR_SERVICE_NAMESPACE ]: "yourNameSpace",
     //   [ ATTR_SERVICE_VERSION ]: "1.0",
     //   [ ATTR_SERVICE_INSTANCE_ID ]: "my-instance-id-1",
