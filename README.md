@@ -1,7 +1,8 @@
+[![OSS Lifecycle](https://img.shields.io/osslifecycle/honeycombio/academy-instrumentation-nodejs)](https://github.com/honeycombio/home/blob/main/honeycomb-oss-lifecycle-and-practices.md)
 
 # Honeycomb Academy: Sample Meminator App
 
-***This is a demo app, don't run it in production***
+***This is a demo app, don't run it in production.***
 
 This contains a sample application for use in Honeycomb Academy lab activities. This app has 4 services.  
 
@@ -49,21 +50,6 @@ git clone https://github.com/honeycombio/academy-instrumentation-nodejs
 ```
 
 Install Docker: https://docs.docker.com/get-docker/
-
-And update the `.env` file with your Honeycomb API key:
-```bash
-HONEYCOMB_API_KEY="your-api-key"
-
-# you could change this to your own S3 bucket of images. We accept no responsibility for the outcome.
-# Note: "random-pictures" is an actual S3 bucket name supplied for this course, filled with SFW meme images
-BUCKET_NAME="random-pictures"
-
-OTEL_EXPORTER_OTLP_ENDPOINT="https://api.honeycomb.io:443/"
-OTEL_EXPORTER_OTLP_HEADERS="x-honeycomb-team=${HONEYCOMB_API_KEY}"
-```
-
-If you don't have an API key handy, here is the [documentation](https://docs.honeycomb.io/get-started/configure/environments/manage-api-keys/#create-api-key).
-
 
 ### Run the app
 
