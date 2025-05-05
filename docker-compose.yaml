@@ -10,6 +10,7 @@ services:
       - OTEL_EXPORTER_OTLP_ENDPOINT
       - OTEL_EXPORTER_OTLP_HEADERS
       - OTEL_SERVICE_NAME=backend-for-frontend
+      - OTEL_SEMCONV_STABILITY_OPT_IN
     healthcheck:
       test: ["CMD-SHELL", "curl -f http://localhost:10115/health || exit 1"]
       interval: 5s
@@ -22,12 +23,13 @@ services:
       dockerfile: Dockerfile
     image: image-picker-nodejs:latest
     ports:
-      - "10116" 
+      - "10116"
     environment:
       - BUCKET_NAME
       - OTEL_EXPORTER_OTLP_ENDPOINT
       - OTEL_EXPORTER_OTLP_HEADERS
       - OTEL_SERVICE_NAME=image-picker-nodejs
+      - OTEL_SEMCONV_STABILITY_OPT_IN
 
   meminator:
     build:
@@ -35,11 +37,12 @@ services:
       dockerfile: Dockerfile
     image: meminator-nodejs:latest
     ports:
-      - "10117" 
+      - "10117"
     environment:
       - OTEL_EXPORTER_OTLP_ENDPOINT
       - OTEL_EXPORTER_OTLP_HEADERS
       - OTEL_SERVICE_NAME=meminator-nodejs
+      - OTEL_SEMCONV_STABILITY_OPT_IN
 
   phrase-picker:
     build:
@@ -47,11 +50,12 @@ services:
       dockerfile: Dockerfile
     image: phrase-picker-nodejs:latest
     ports:
-      - "10118" 
+      - "10118"
     environment:
       - OTEL_EXPORTER_OTLP_ENDPOINT
       - OTEL_EXPORTER_OTLP_HEADERS
       - OTEL_SERVICE_NAME=phrase-picker-nodejs
+      - OTEL_SEMCONV_STABILITY_OPT_IN
 
   web:
     build:
@@ -72,4 +76,4 @@ services:
       meminator:
         condition: service_started
       phrase-picker:
-        condition: service_started        
+        condition: service_started
