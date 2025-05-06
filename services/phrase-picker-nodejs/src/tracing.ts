@@ -1,23 +1,27 @@
 import { NodeSDK } from '@opentelemetry/sdk-node';
 import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-proto";
-import * as opentelemetry from '@opentelemetry/api';
+import { diag, DiagConsoleLogger, DiagLogLevel } from '@opentelemetry/api';
 
-opentelemetry.diag.setLogger(
-    new opentelemetry.DiagConsoleLogger(),
-    opentelemetry.DiagLogLevel.INFO
-);
+diag.setLogger(new DiagConsoleLogger(), DiagLogLevel.INFO);
+
 // The Trace Exporter exports the data to Honeycomb and uses
 // environment variables for endpoint, service name, and API Key.
 const traceExporter = new OTLPTraceExporter();
 
 const sdk = new NodeSDK({
     traceExporter,
-    instrumentations: [getNodeAutoInstrumentations(
-        { '@opentelemetry/instrumentation-fs': { enabled: false } } 
-    )]
+    instrumentations: [getNodeAutoInstrumentations()],
 });
 
 sdk.start();
 
 console.log("Started OpenTelemetry SDK in phrase-picker");
+
+// gracefully shut down the SDK on process exit
+process.on('SIGTERM', () => {
+    sdk.shutdown()
+      .then(() => console.log('Tracing terminated'))
+      .catch((error) => console.log('Error terminating tracing', error))
+      .finally(() => process.exit(0));
+  });
