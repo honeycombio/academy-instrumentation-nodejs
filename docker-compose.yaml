@@ -9,41 +9,12 @@ services:
         - linux/arm64
     image: backend-for-frontend-nodejs:latest
     ports:
-      - "10115:10114" # Expose the port your Express app is listening on
+      - "10115:10115" # Expose the port your Express app is listening on
     environment:
       - OTEL_EXPORTER_OTLP_ENDPOINT
       - OTEL_EXPORTER_OTLP_HEADERS
       - OTEL_SERVICE_NAME=backend-for-frontend-nodejs
-
-  meminator:
-    build:
-      context: services/meminator-nodejs
-      dockerfile: Dockerfile
-      platforms:
-        - linux/amd64
-        - linux/arm64
-    image: meminator-nodejs:latest
-    ports:
-      - "10116:10114" # they can't be the same
-    environment:
-      - OTEL_EXPORTER_OTLP_ENDPOINT
-      - OTEL_EXPORTER_OTLP_HEADERS
-      - OTEL_SERVICE_NAME=meminator-nodejs
-
-  phrase-picker:
-    build:
-      context: services/phrase-picker-nodejs
-      dockerfile: Dockerfile
-      platforms:
-        - linux/amd64
-        - linux/arm64
-    image: phrase-picker-nodejs:latest
-    ports:
-      - "10117:10114" # the outer ports can't be the same
-    environment:
-      - OTEL_EXPORTER_OTLP_ENDPOINT
-      - OTEL_EXPORTER_OTLP_HEADERS
-      - OTEL_SERVICE_NAME=phrase-picker-nodejs
+      - OTEL_SEMCONV_STABILITY_OPT_IN
 
   image-picker:
     build:
@@ -54,12 +25,45 @@ services:
         - linux/arm64
     image: image-picker-nodejs:latest
     ports:
-      - "10118:10114" # the outer ports can't be the same
+      - "10116:10116"
     environment:
       - BUCKET_NAME
       - OTEL_EXPORTER_OTLP_ENDPOINT
       - OTEL_EXPORTER_OTLP_HEADERS
       - OTEL_SERVICE_NAME=image-picker-nodejs
+      - OTEL_SEMCONV_STABILITY_OPT_IN
+
+  meminator:
+    build:
+      context: services/meminator-nodejs
+      dockerfile: Dockerfile
+      platforms:
+        - linux/amd64
+        - linux/arm64
+    image: meminator-nodejs:latest
+    ports:
+      - "10117:10117" # they can't be the same
+    environment:
+      - OTEL_EXPORTER_OTLP_ENDPOINT
+      - OTEL_EXPORTER_OTLP_HEADERS
+      - OTEL_SERVICE_NAME=meminator-nodejs
+      - OTEL_SEMCONV_STABILITY_OPT_IN
+
+  phrase-picker:
+    build:
+      context: services/phrase-picker-nodejs
+      dockerfile: Dockerfile
+      platforms:
+        - linux/amd64
+        - linux/arm64
+    image: phrase-picker-nodejs:latest
+    ports:
+      - "10118:10118"
+    environment:
+      - OTEL_EXPORTER_OTLP_ENDPOINT
+      - OTEL_EXPORTER_OTLP_HEADERS
+      - OTEL_SERVICE_NAME=phrase-picker-nodejs
+      - OTEL_SEMCONV_STABILITY_OPT_IN
 
   web:
     build:
@@ -75,9 +79,10 @@ services:
     #   - ./services/web/dist:/usr/share/nginx/html # Mount directory containing static files -- only do this for development
     ports:
       - "8080:80" # Expose port 8080 for Nginx
+      - "10114:10114"
 
   otel-collector:
-    image: otel/opentelemetry-collector-contrib:0.96.0
+    image: otel/opentelemetry-collector:0.110.0
     ports:
       - "4317:4317" # OpenTelemetry gRPC
       - "4318:4318" # OpenTelemetry HTTP
