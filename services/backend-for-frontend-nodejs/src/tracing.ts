@@ -10,6 +10,7 @@ import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentation
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-proto";
 import { diag, DiagConsoleLogger, DiagLogLevel } from '@opentelemetry/api';
 // Step 2 of Add Resource Attributes. Import the resource library and semantic conventions libraries from OpenTelemetry
+// import { resourceFromAttributes } from '@opentelemetry/resources'
 // import { ATTR_SERVICE_VERSION } from '@opentelemetry/semantic-conventions';
 // import { ATTR_SERVICE_NAMESPACE, ATTR_SERVICE_INSTANCE_ID } from './semconv';
 
@@ -21,7 +22,7 @@ const traceExporter = new OTLPTraceExporter();
 
 const sdk = new NodeSDK({
     // Step 3 of Add Resource Attributes. Add the resource attribute in the SDK
-        // resource: new Resource({
+        // resource: resourceFromAttributes({
         //     [ ATTR_SERVICE_NAMESPACE ]: "yourNameSpace",
         //     [ ATTR_SERVICE_VERSION ]: "1.0",
         //     [ ATTR_SERVICE_INSTANCE_ID ]: "my-instance-id-1",
