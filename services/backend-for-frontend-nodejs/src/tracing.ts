@@ -1,5 +1,5 @@
 // Answer Key Directions
-// The Instrumenting with Node.js Using OpenTelemetry course on Honeycomb Academy gives you instructions on making code changes to this respository to implement instrumentation to the backend-for-frontend service.
+// The Instrumenting with Node.js Using OpenTelemetry course on Honeycomb Academy gives you instructions on making code changes to this repository to implement instrumentation to the backend-for-frontend service.
 // The code changes are commented out.
 // Each code change includes a reference back to the activity in the course that contains instructions for the code change.
 
@@ -9,7 +9,7 @@ import { NodeSDK } from '@opentelemetry/sdk-node';
 import { getNodeAutoInstrumentations } from '@opentelemetry/auto-instrumentations-node';
 import { OTLPTraceExporter } from "@opentelemetry/exporter-trace-otlp-proto";
 import { diag, DiagConsoleLogger, DiagLogLevel } from '@opentelemetry/api';
-// Step 2 of Add Resource Attributes. Import the resource library and semantic conventions libaries from OpenTelemetry
+// Step 2 of Add Resource Attributes. Import the resource library and semantic conventions libraries from OpenTelemetry
 // import { Resource } from '@opentelemetry/resources'
 // import {
 //   ATTR_SERVICE_NAMESPACE,
