@@ -15,9 +15,9 @@ RUN npm install
 
 COPY tsconfig.json .
 # Copy the rest of the application code to the working directory
-COPY ./src ./src
+COPY ./src/*.ts ./src/
 
-RUN npx tsc 
+RUN npx tsc
 
 # Expose the port that your app runs on
 EXPOSE 10115
