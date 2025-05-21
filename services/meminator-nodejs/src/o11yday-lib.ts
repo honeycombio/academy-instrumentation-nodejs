@@ -5,7 +5,7 @@
 
 import { W3CTraceContextPropagator } from '@opentelemetry/core';
 import { context, defaultTextMapSetter, trace, Attributes, SpanStatusCode, Span, SpanKind, SpanOptions } from '@opentelemetry/api';
-import { SEMATTRS_HTTP_METHOD, SEMATTRS_HTTP_URL } from '@opentelemetry/semantic-conventions';
+import { ATTR_HTTP_REQUEST_METHOD, ATTR_HTTP_RESPONSE_STATUS_CODE, ATTR_URL_FULL } from '@opentelemetry/semantic-conventions';
 
 const SERVICES = {
     'image-picker': 'http://image-picker:10116/imageUrl',
@@ -20,12 +20,12 @@ type FetchOptions = {
 
 /**
  * Make an HTTP request to one of our services.
- * 
+ *
  * INSTRUMENTATION: internal libraries like this one are a great place to add telemetry.
- * 
+ *
  * @param service one of our known services
  * @param options choose method and/or send a body
- * @returns 
+ * @returns
  */
 export async function fetchFromService(service: keyof typeof SERVICES, options?: FetchOptions) {
     // // INSTRUMENTATION: MAKE A 'client' SPAN: we want to represent an outgoing network request
@@ -46,15 +46,15 @@ export async function fetchFromService(service: keyof typeof SERVICES, options?:
     ////INSTRUMENTATION: populate some standard attributes
     // span.setAttributes({
     //     "http.headers": JSON.stringify(headers),
-    //     [SEMATTRS_HTTP_METHOD]: options?.method || "GET",
-    //     [SEMATTRS_HTTP_URL]: url,
+    //     [ATTR_HTTP_REQUEST_METHOD]: options?.method || "GET",
+    //     [ATTR_URL_FULL]: url,
     // });
 
     const response = await fetch(url, { headers, method, body });
 
     //// INSTRUMENTATION: populate some standard attributes
     // span.setAttributes({
-    //     "http.status_code": response.status,
+        // [ATTR_HTTP_RESPONSE_STATUS_CODE]: response.status,
     //     "http.status_text": response.statusText,
     //     "http.redirected": response.redirected,
     // });
@@ -70,9 +70,9 @@ const tracer = trace.getTracer("o11yday-lib");
 /**
  * Use this to wrap _synchronous_ code in a span.
  * @param name name of the span
- * @param attributes 
- * @param fn 
- * @returns 
+ * @param attributes
+ * @param fn
+ * @returns
  */
 export function inSpan<T>(name: string, attributes: Attributes, fn: () => T): T {
     return tracer.startActiveSpan(
@@ -103,9 +103,9 @@ export function inSpan<T>(name: string, attributes: Attributes, fn: () => T): T 
 /**
  * Use this to wrap asynchronous code in a span.
  * @param name name of the span
- * @param attributes 
- * @param fn async 
- * @returns 
+ * @param attributes
+ * @param fn async
+ * @returns
  */
 export function inSpanAsync<T>(name: string, options: SpanOptions, fn: (span: Span) => Promise<T>): Promise<T> {
     return tracer.startActiveSpan(
