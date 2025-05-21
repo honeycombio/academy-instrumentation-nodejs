@@ -23,9 +23,9 @@ const traceExporter = new OTLPTraceExporter();
 const sdk = new NodeSDK({
     // Step 3 of Add Resource Attributes. Add the resource attribute in the SDK
         // resource: resourceFromAttributes({
-        //     [ ATTR_SERVICE_NAMESPACE ]: "yourNameSpace",
+        //     [ "service.namespace" ]: "yourNameSpace",
         //     [ ATTR_SERVICE_VERSION ]: "1.0",
-        //     [ ATTR_SERVICE_INSTANCE_ID ]: "my-instance-id-1",
+        //     [ "service.instance.id" ]: "my-instance-id-1",
         //   }),
     traceExporter,
     // spanProcessors: [new ConfigurationSpanProcessor(), new BatchSpanProcessor(traceExporter)], // INSTRUMENTATION: report global configuration on every span

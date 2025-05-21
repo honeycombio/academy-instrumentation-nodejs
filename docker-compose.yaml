@@ -42,7 +42,7 @@ services:
         - linux/arm64
     image: meminator-nodejs:latest
     ports:
-      - "10117:10117" # they can't be the same
+      - "10117:10117"
     environment:
       - OTEL_EXPORTER_OTLP_ENDPOINT
       - OTEL_EXPORTER_OTLP_HEADERS
