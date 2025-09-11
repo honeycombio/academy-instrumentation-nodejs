@@ -20,7 +20,7 @@ Hello! Welcome to the **Instrumenting with Node.js** course lab.
 
 ## Running the application
 
-To run this app, you can use GitPod or Codespaces. Note that Gitpod and Codespaces are free up to a certain number of hours per month.
+To run this app, you can use Codespaces. Note that Codespades is free up to a certain number of hours per month.
 
 Once you run the application, you can send traces to Honeycomb. Then you can practice improving the instrumentation for better observability.
 
@@ -29,14 +29,6 @@ Once you run the application, you can send traces to Honeycomb. Then you can pra
 Open the repository on GitHub. Open the `<> Code` dropdown down menu.
 
 Select the `Codespaces` tab. Create a codespace on main.
-
-### GitPod setup
-
-Go to [Gitpod](https://gitpod.io/#https://github.com/honeycombio/academy-instrumentation-nodejs) to open the repository.
-
-Confirm the workspace creation. You can work in the browser with VS Code Browser or in your local code editor. The default settings are acceptable.
-
-Once you are in the code editor, run `docker compose up` in the code editor's terminal. To stop running the application, run `ctrl+c`. Then run `docker compose down` to remove the container.
 
 ### One-time setup
 
